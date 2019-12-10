@@ -23,6 +23,7 @@ class ApplicationTests {
 
         then(servletContext).isNotNull
         then(servletContext is MockServletContext).isTrue()
-        then(webApplicationContext.getBean("acceptController")).isNotNull
+        then(webApplicationContext.getBean("getController")).isNotNull
+        then(webApplicationContext.getBean("postController")).isNotNull
     }
 }
