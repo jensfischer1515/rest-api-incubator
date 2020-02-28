@@ -41,6 +41,11 @@ class GetController {
             @RequestHeader(name = ACCEPT, required = false) accept: String?
     ): ResponseHal = ResponseEntity.ok(ResponsePayload(accept = accept))
 
+    @GetMapping(produces = ["""application/hal+json;profile="https://api.otto.de/api-docs/profiles/response-v2""""])
+    fun applicationHalJsonResponseV2(
+            @RequestHeader(name = ACCEPT, required = false) accept: String?
+    ): ResponseHal = ResponseEntity.ok(ResponsePayload(accept = accept))
+
     @GetMapping(produces = ["""application/hal+json;profile="https://api.otto.de/api-docs/profiles/response";version=1.0"""])
     fun applicationHalJsonResponseVersion1(
             @RequestHeader(name = ACCEPT, required = false) accept: String?

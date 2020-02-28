@@ -124,6 +124,22 @@ class GetControllerTest {
     }
 
     @Test
+    fun `should GET with applicationHalJsonResponseV2`() {
+        // Given
+        val accept = """application/hal+json;profile="https://api.otto.de/api-docs/profiles/response-v2""""
+        val request = get("/incubator").accept(accept)
+
+        // When
+        val resultActions = mockMvc.perform(request).andDo(log())
+
+        // Then
+        resultActions
+                .andExpect(status().isOk)
+                .andExpect(handler().methodName("applicationHalJsonResponseV2"))
+                .andExpect(jsonPath("$.accept").value(accept))
+    }
+
+    @Test
     fun `should GET with applicationHalJsonResponseVersion1`() {
         // Given
         val accept = """application/hal+json;profile="https://api.otto.de/api-docs/profiles/response";version=1.0"""
