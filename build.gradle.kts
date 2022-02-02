@@ -1,32 +1,24 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "2.2.5.RELEASE"
-	id("io.spring.dependency-management") version "1.0.9.RELEASE"
-	id( "com.github.ben-manes.versions") version "0.28.0"
-	kotlin("jvm") version "1.3.61"
-	kotlin("plugin.spring") version "1.3.61"
+	id("org.springframework.boot") version "2.6.3"
+	id("io.spring.dependency-management") version "1.0.11.RELEASE"
+	id( "com.github.ben-manes.versions") version "0.41.0"
+	kotlin("jvm") version "1.6.10"
+	kotlin("plugin.spring") version "1.6.10"
 }
 
 group = "de.otto"
 version = "0.0.1-SNAPSHOT"
-java.sourceCompatibility = JavaVersion.VERSION_1_8
+java.sourceCompatibility = JavaVersion.VERSION_11
 
-val developmentOnly by configurations.creating
-configurations {
-	runtimeClasspath {
-		extendsFrom(developmentOnly)
-	}
-	compileOnly {
-		extendsFrom(configurations.annotationProcessor.get())
-	}
-}
 
 repositories {
 	mavenCentral()
 }
 
 dependencies {
+	implementation(platform("com.fasterxml.jackson:jackson-bom:2.13.1"))
 	implementation("org.springframework.boot:spring-boot-starter-actuator")
 	implementation("org.springframework.boot:spring-boot-starter-hateoas")
 	implementation("org.springframework.boot:spring-boot-starter-web")
@@ -38,16 +30,10 @@ dependencies {
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 }
 
-dependencyManagement {
-	imports {
-		mavenBom("com.fasterxml.jackson:jackson-bom:2.10.2")
-	}
-}
-
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
 		freeCompilerArgs = listOf("-Xjsr305=strict")
-		jvmTarget = "1.8"
+		jvmTarget = "11"
 	}
 }
 
