@@ -4,10 +4,17 @@ Project to try out different REST API concerns.
 
 ## Build & run
 
-Use Gradle to build the project and run its tests:
-
+## Locally
+Use Gradle to run the project:
 ```bash
-$ ./gradlew build
+$ ./gradlew bootJar
+```
+
+## With a reverse proxy in front
+Use docker-compose to run the project:
+```bash
+$ ./gredlew bootBuildImage
+$ docker-compose up
 ```
 
 ## Covered concerns
