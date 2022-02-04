@@ -13,7 +13,7 @@ $ ./gradlew bootJar
 ## With a reverse proxy in front
 Use docker-compose to run the project:
 ```bash
-$ ./gredlew bootBuildImage
+$ ./gradlew bootBuildImage
 $ docker-compose up
 ```
 
