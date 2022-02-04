@@ -1,0 +1,41 @@
+# Tests directly against a locally running service
+# -----------------------------------
+# Working cases:
+###
+#@name GET application/json with profile parameter
+GET http://localhost:8080/json-profiles/
+Accept: application/json;profile="https://api.otto.de/api-docs/profiles/response-v2"
+
+###
+#@name POST application/json with profile parameter
+# Content-Negotiation works only with Accept header ...
+POST http://localhost:8080/json-profiles
+Content-Type: application/json;profile="https://api.otto.de/api-docs/profiles/response-v2"
+Accept: application/hal+json;profile="https://api.otto.de/api-docs/profiles/response-v2"
+
+{
+  "my content" : "blub"
+}
+###
+#@name POST application/json with profile parameter through reverse proxy
+POST http://localhost/json-profiles
+Host: rest.local
+Content-Type: application/json;profile="https://api.otto.de/api-docs/profiles/response-v2"
+Accept: application/hal+json;profile="https://api.otto.de/api-docs/profiles/response-v2"
+
+{
+  "my content" : "blub"
+}
+###
+#--------------------
+#Broken cases:
+#
+###
+#@name POST without Accept header against only controller based media type handling... routing goes wrong
+# see https://github.com/spring-projects/spring-framework/issues/27999
+POST http://localhost:8080/json-profiles
+Content-Type: application/json;profile="https://api.otto.de/api-docs/profiles/response-v2"
+
+{
+  "my content" : "blub"
+}

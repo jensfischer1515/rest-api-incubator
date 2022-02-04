@@ -1,11 +1,9 @@
 package de.otto.rest
 
-import org.junit.Before
-import org.junit.Test
-import org.junit.runner.RunWith
+import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
-import org.springframework.test.context.junit4.SpringRunner
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers.log
@@ -15,7 +13,6 @@ import org.springframework.web.context.WebApplicationContext
 
 
 @SpringBootTest
-@RunWith(SpringRunner::class)
 class PostControllerTest {
 
     @Autowired
@@ -23,7 +20,7 @@ class PostControllerTest {
 
     private lateinit var mockMvc: MockMvc
 
-    @Before
+    @BeforeEach
     fun setup() {
         mockMvc = webAppContextSetup(webApplicationContext).build()
     }
